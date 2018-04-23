@@ -1,0 +1,5 @@
+url = `curl -X POST -H "Content-Type: application/json" -d '{  "type": "standard",  "image_size": 1000}' "https://graph.facebook.com/v2.6/me/messenger_codes?access_token=EAAJWmzW277QBANpLnf0FmfcZC5OX4uCAmM6ZAUOWl5T4xKaJjiZCKAU4QdH3S8tX890COSpOK0zZCuJj35HfkR0LdyvEXnXLVXfupNMsZBjGzYXFyiIMyrmKwNZBg8jO0b0fPw1OyCTgqbLqEfZAJEBDtN6yG3OD6xYLbWUeTfcYAZDZD"`
+url.gsub!("\\", "")
+
+require 'json'
+puts JSON.parse(url)["uri"]
