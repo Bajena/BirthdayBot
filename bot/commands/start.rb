@@ -1,8 +1,8 @@
 module Commands
-  BIRTHDAY_DATE = "2018-05-03".freeze
+  BIRTHDAY_DATE = Date.new(2018, 5, 3)
 
   def start
-    return start_basic if Date.today.to_s != BIRTHDAY_DATE
+    return start_basic if Date.today > BIRTHDAY_DATE
 
     quiz_state.won? ? start_basic : start_with_quiz
   end
@@ -23,6 +23,12 @@ module Commands
   end
 
   def start_basic
-    say 'Cześć Bluperku, jak mogę ci dzisiaj poprawić humor?'
+    say "Cześć Bluperku, jak mogę ci poprawić humor?", quick_replies: NICE_THING_REPLIES
+    next_command :send_nice_thing
+  end
+
+  def help
+    say "Co chciałabyś, żebym zrobił?", quick_replies: NICE_THING_REPLIES
+    next_command :send_nice_thing
   end
 end

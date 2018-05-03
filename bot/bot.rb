@@ -1,8 +1,8 @@
-require 'rubotnik'
+require "rubotnik"
 # require_relative all files in "bot" folder or do it by hand
-Rubotnik::Autoloader.load('bot')
+Rubotnik::Autoloader.load("bot")
 
-Rubotnik.subscribe(ENV['ACCESS_TOKEN'])
+Rubotnik.subscribe(ENV["ACCESS_TOKEN"])
 
 Rubotnik.set_profile(
   Profile::START_GREETING,
@@ -10,16 +10,23 @@ Rubotnik.set_profile(
 )
 
 Rubotnik.route :message do
-  # Will work for all variations of these three greetings
-  bind 'hi', 'hello', 'bonjour' do
-    say 'Hello from your new bot!'
+  bind "hi", "hello", "bonjour" do
+    say "Hello from your new bot!"
   end
 
-  bind 'witam', 'cześć', 'dzień dobry', 'hejka' do
+  bind "witam", "cześć", "dzień dobry", "hejka", "halo" do
     start
   end
 
-  bind 'quiz' do
+  bind "coś", "miłego", all: true do
+    send_random_thing
+  end
+
+  bind "pomoc", "pomocy", "co robić", "co mogę", "help" do
+    help
+  end
+
+  bind "quiz" do
     start_with_quiz
   end
 

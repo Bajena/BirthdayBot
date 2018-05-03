@@ -22,6 +22,12 @@ module Commands
   end
 
   def handle_answer
+    if message.text == "Stop"
+      say "Dobrze, kończymy quiz :/"
+      stop_thread
+      return
+    end
+
     answer = current_question.answer_for(message.quick_reply)
 
     unless answer
@@ -31,10 +37,10 @@ module Commands
     end
 
     if answer.valid?
-      say "Brawo!"
+      say "Brawo, dobra odpowiedź!"
       quiz_state.add_point!
     else
-      say "Niestety, zła odpowiedź"
+      say "Niestety, zła odpowiedź :("
     end
 
     print_score
@@ -49,12 +55,29 @@ module Commands
 
   def handle_finish
     if quiz_state.won?
-      say "Wygrywasz!"
+      handle_win
     elsif quiz_state.lost?
-      say "Koniec quizu. Niestety, masz za mało punktów. Spróbuj jeszcze raz."
+      handle_lose
     end
+  end
+
+  def handle_win
+    say "Wygrywasz! Zasłużyłaś na niespodziankę :*"
+    say "Poproś Jaśka o nagrodę ;)"
+
+    message.typing_on
+
+    say "Mam dla ciebie jeszcze kilka asów w rękawie - pisz do mnie kiedy chcesz, a wyślę ci coś, co poprawi Ci humor."
+    say "Napisz \"Wyślij mi coś miłego Jasiaczku\" albo \"Pomoc\""
 
     stop_thread
+  end
+
+  def handle_lose
+    say "Koniec quizu. Niestety, masz za mało punktów, aby zdobyć nagrodę. Chcesz spróbować jeszcze raz?", quick_replies: [
+      ['Tak', 'quiz_start_ok'], ['Nie', 'quiz_start_no']
+    ]
+    next_command :quiz_handle_start
   end
 
   def print_score

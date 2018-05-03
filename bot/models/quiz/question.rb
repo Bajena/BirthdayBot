@@ -2,8 +2,8 @@ module Quiz
   class Question
     QUESTIONS = [
       {
-        text: "Kto najbardziej kocha Oluśkę?",
-        answers: ["Lemik", "Topek", "Jasiaczek", "Don Arkada"],
+        text: "Kto najbardziej kocha Olę?",
+        answers: ["Lemik", "Topek", "Jasiek", "Don Arkada"],
         valid_answer: 2
       },
       {
