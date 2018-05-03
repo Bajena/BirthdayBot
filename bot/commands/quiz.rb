@@ -16,6 +16,7 @@ module Commands
   end
 
   def ask_question
+    say "Pytanie #{current_question.index + 1}/#{Quiz::Question.questions_count}:"
     say current_question.text, quick_replies: current_question.quick_replies
 
     next_command :handle_answer

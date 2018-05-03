@@ -8,5 +8,7 @@ module Commands
     "Choć tuuuu!!!!",
     "Jesteś najpiękniejszą kobietą jaką widział świat!",
     "Uwielbiam Cię",
+    "Jesteś niesamowitą kocicą 🐱",
+    "Robisz doskonale snacze!"
   ].freeze
 end

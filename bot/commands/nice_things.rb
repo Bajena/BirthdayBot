@@ -42,7 +42,7 @@ module Commands
   private
 
   def want_more?
-    say "Chciałabyś coś jeszcze?", quick_replies: NICE_THING_REPLIES
+    say "Mogę coś jeszcze dla Ciebie zrobić?", quick_replies: NICE_THING_REPLIES
     next_command :send_nice_thing
   end
 
