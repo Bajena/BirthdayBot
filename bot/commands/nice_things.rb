@@ -16,7 +16,9 @@ module Commands
     case message.quick_reply
     when "send_song" then send_random_song
     when "send_photo" then send_random_photo
-    when "send_text" then send_random_text
+    when "send_text"
+      say "Powiem Ci coś miłego:"
+      send_random_text
     when "send_random" then send_random_thing
     when "send_nothing"
       say "Ok, pisz, jakbyś czegoś potrzebowała ;)"

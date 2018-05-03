@@ -46,13 +46,17 @@ Rubotnik.route :message do
     say ["Proszę :)", "Nie ma za co"].sample
   end
 
+  bind "ok", "oki" do
+    # Do nothing
+  end
+
   bind "quiz" do
     start_with_quiz
   end
 
   # Invoked if none of the commands recognized. Has to come last, after all binds
   default do
-    say "Echhhh, nie wiem co odpowiedzieć :/"
+    start_basic
   end
 end
 

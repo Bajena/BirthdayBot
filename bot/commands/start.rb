@@ -23,7 +23,7 @@ module Commands
   end
 
   def start_basic
-    say "Cześć Bluperku, jak mogę ci poprawić humor?", quick_replies: NICE_THING_REPLIES
+    say "Bluperku, jak mogę ci poprawić humor?", quick_replies: NICE_THING_REPLIES
     next_command :send_nice_thing
   end
 end
