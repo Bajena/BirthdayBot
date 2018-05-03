@@ -1,30 +1,16 @@
 module Commands
   NICE_THING_REPLIES = [
     ["Wyślij mi zdjęcie", "send_photo"],
-    ["Wyślij mi fajną piosenkę", "send_song"],
+    ["Wyślij mi piosenkę", "send_song"],
     ["Powiedz coś miłego", "send_text"],
     ["Nie wiem, wymyśl coś", "send_random"],
     ["Nic, dzięki", "send_nothing"]
   ].freeze
 
-  PHOTO_URLS = [
-    "https://typefast.blog/wp-content/uploads/2018/02/ruby-1000x1000.jpg"
-  ].freeze
-
-  SONG_URLS = [
-    "https://open.spotify.com/track/7GhIk7Il098yCjg4BQjzvb"
-  ].freeze
-
-  NICE_TEXTS = [
-    "Jesteś super!"
-  ]
-
-  THINKING_TEXTS = [
-    "Co by tu wysłać, hmmmm... Mam:",
-    "Łap:",
-    "Już wiem! Obczaj to:",
-    "Hmmm... wiem:"
-  ].freeze
+  def help
+    say "Co chciałabyś, żebym zrobił?", quick_replies: NICE_THING_REPLIES
+    next_command :send_nice_thing
+  end
 
   def send_nice_thing
     case message.quick_reply
@@ -41,8 +27,6 @@ module Commands
       stop_thread
       return
     end
-
-    say "Chciałabyś coś jeszcze?", quick_replies: NICE_THING_REPLIES
   end
 
   def send_random_thing
@@ -57,28 +41,43 @@ module Commands
 
   private
 
+  def want_more?
+    say "Chciałabyś coś jeszcze?", quick_replies: NICE_THING_REPLIES
+    next_command :send_nice_thing
+  end
+
   def show_thinking_text
-    with_typing do
-      say THINKING_TEXTS.sample
-    end
+    say THINKING_TEXTS.sample
   end
 
   def send_random_song
     show_thinking_text
 
-    send_song SONG_URLS.sample
+    with_typing do
+      send_song SONG_URLS.sample
+    end
+
+    want_more?
   end
 
   def send_random_photo
     show_thinking_text
 
-    send_song PHOTO_URLS.sample
+    with_typing do
+      photo = PHOTO_URLS.sample
+      puts "Sending photo: #{photo}"
+      send_photo(photo)
+    end
+
+    want_more?
   end
 
   def send_random_text
     with_typing do
       say NICE_TEXTS.sample
     end
+
+    want_more?
   end
 
   def send_photo(url)
@@ -89,4 +88,11 @@ module Commands
   def send_song(url)
     show(UI::OpenGraphTemplate.new(url))
   end
+
+  THINKING_TEXTS = [
+    "Co by tu wysłać, hmmmm... Mam:",
+    "Łap:",
+    "Obczaj to:",
+    "Hmmm... wiem:"
+  ].freeze
 end

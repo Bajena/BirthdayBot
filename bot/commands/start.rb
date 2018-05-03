@@ -26,9 +26,4 @@ module Commands
     say "Cześć Bluperku, jak mogę ci poprawić humor?", quick_replies: NICE_THING_REPLIES
     next_command :send_nice_thing
   end
-
-  def help
-    say "Co chciałabyś, żebym zrobił?", quick_replies: NICE_THING_REPLIES
-    next_command :send_nice_thing
-  end
 end

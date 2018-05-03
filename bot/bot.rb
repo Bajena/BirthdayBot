@@ -18,12 +18,32 @@ Rubotnik.route :message do
     start
   end
 
-  bind "coś", "miłego", all: true do
-    send_random_thing
+  bind "papa", "do widzenia", "na razie" do
+    "Trzymaj się :*"
   end
 
   bind "pomoc", "pomocy", "co robić", "co mogę", "help" do
     help
+  end
+
+  bind "powiedz", "coś", all: true do
+    send_random_text
+  end
+
+  bind "zdjecie", "zdjęcie", "fotke", "fotkę", "fotki" do
+    send_random_photo
+  end
+
+  bind "piosenka", "piosenkę", "muzyka", "muzyczkę" do
+    send_random_song
+  end
+
+  bind "wyślij", "coś", all: true do
+    send_random_thing
+  end
+
+  bind "dziękuję", "dzięki", "dzięx" do
+    say ["Proszę :)", "Nie ma za co"].sample
   end
 
   bind "quiz" do
@@ -32,7 +52,7 @@ Rubotnik.route :message do
 
   # Invoked if none of the commands recognized. Has to come last, after all binds
   default do
-    say "Echhhh, nie umiem ci pomóc :/"
+    say "Echhhh, nie wiem co odpowiedzieć :/"
   end
 end
 

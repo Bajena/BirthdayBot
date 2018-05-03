@@ -68,7 +68,6 @@ module Commands
     message.typing_on
 
     say "Mam dla ciebie jeszcze kilka asów w rękawie - pisz do mnie kiedy chcesz, a wyślę ci coś, co poprawi Ci humor."
-    say "Napisz \"Wyślij mi coś miłego Jasiaczku\" albo \"Pomoc\""
 
     stop_thread
   end
