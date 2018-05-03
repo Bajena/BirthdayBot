@@ -47,7 +47,7 @@ module Commands
   end
 
   def show_thinking_text
-    say THINKING_TEXTS.sample
+    THINKING_TEXTS.sample.each { |t| say t }
   end
 
   def send_random_song
@@ -65,7 +65,6 @@ module Commands
 
     with_typing do
       photo = PHOTO_URLS.sample
-      puts "Sending photo: #{photo}"
       send_photo(photo)
     end
 
@@ -90,9 +89,9 @@ module Commands
   end
 
   THINKING_TEXTS = [
-    "Co by tu wysłać, hmmmm... Mam:",
-    "Łap:",
-    "Obczaj to:",
-    "Hmmm... wiem:"
+    ["Co by tu wysłać, hmmmm...", "Mam:"],
+    ["Łap:"],
+    ["Obczaj to:"],
+    ["Hmmm...", "Wiem:"]
   ].freeze
 end
